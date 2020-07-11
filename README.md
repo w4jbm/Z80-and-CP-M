@@ -1,5 +1,5 @@
 # Z80-and-CP-M
-Various small Z80 and CP/M related projects
+Various small Z80 and CP/M related projects. Many of these assemble under the Z80ASM assembler from SLR.
 
 ## CPUTYPE.Z80
 This program assembles and runs under CP/M and will tell you the type of processor (8080, Z80, or Z180) you are running. This was originally in a batch of CP/M examples with very little explaination of the logic. I created most of the detailed commentary (130 lines vs 55 lines) for my own edification.
