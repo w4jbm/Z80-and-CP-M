@@ -1,0 +1,131 @@
+; CPUTYPE (Ver 1.0)
+;
+; Update by:	Jim McClanahan (W4JBM) in July 2020
+;
+; This was originally in a batch of CP/M examples. The author was Bruce Morgen
+; and he also recognized Bob Freed for the 8080 portion of the test. The program
+; had very little explaination of the logic, and I created most of the detailed
+; commentary (130 lines vs 55 lines) for my own edification.
+
+;
+; Define some constants...
+;
+BDOS	EQU	0005H		; Page Zero BDOS Call Vector
+PRNSTR	EQU	9		; BDOS Print String Function #
+
+CR	EQU	0DH		; ASCII Carriage Return
+LF	EQU	0AH		; and Line Feed
+
+;
+; We will use the Z180's MLT BC instruction as part of the test. It is not
+; recognized by the Z80 processor (or the Z80 assembler). By default, the
+; DW directive will revers the order of the bytes in the word, so we have
+; to reverse them in advance so the assembler will un-reverse them.
+;
+MLTBC	EQU	4CEDH		; Two byte opcode (reversed for DW)
+
+;
+; Now lets get started...
+;
+	ORG	0100H		; Create in the CP/M Transient Program Area
+;
+; First we print out the common intro portion of the output message...
+;
+	LD	C,PRNSTR	; Load BDOS Function #
+	LD	DE,STRCPU	; Point to string to print
+	CALL	BDOS		; And print it out
+
+;
+; Now we begin figuring out what type of processor we have...
+;
+
+; On the 8080 Bit 2 of the Flags Register only reports the parity of the
+; accumulator after an ALU operation. On the Z-80, it reports parity for
+; logical operations and overflow for arithmetic operations.
+;
+; Flag Bit :   7   :   6   :   5   :   4   :   3   :   2   :   1   :   0   :
+; 8080     :   S   :   Z   :   -   :   AC  :   -   :   P   :   N   :   C   :
+; Z80      :   S   :   Z   :   -   :   H   :   -   :   P/V :   N   :   C   :
+;
+; S - Sign
+; Z - Zero
+; AC - Aux Carry
+; H - Half-Carry
+; P - Parity
+; P/V - Parity/Overflow
+; N - Add/Subtract
+; C - Carry
+;
+; We will check for the 8080 by SUBtracting A from itself, resulting in
+; a zero. On the 8080, this will set the Parity Flag (Bit 2) to Even. But
+; on the Z80 this operations does not set the Overflow Flag (Bit 2).
+;
+
+;
+; Test for the 8080...
+;
+	SUB	A		; Subtract A from A
+	LD	DE,STRI80	; Point to the 8080 string
+	JP	PE,DONE	; If Bit 2 (Parity) is set, we are on an
+				; 8080. If it is not set, we are on a Z80
+				; and Bit 2 is actually the overflow flag.
+
+;
+; If we drop to here, we are eitehr running a Z80 or a Z180.
+;
+; The Z180 instruction set includes a MuLTiply instruction. To use this,
+; you load two 8-bit values into each half of a register pair. When the
+; MLT instruction is used, the 8 bit registers are multiplied and the
+; 16 bit result is stored in the register pair.
+;
+; We are going to load register pair BC with 0101H and then try to do
+; a MLT BC instruction. On the Z180, this should result in BC becoming
+; 01H x 01H or 0001H. On a Z80, the instruction will do nothing and
+; the value in BC will remain 0101H.
+
+;
+; So let's test fpr a Z180...
+;
+	LD	BC,0101H	; Put ones in B and C
+	DW	MLTBC		; Multiply to BC if a Z180
+				; (a Z80 will ignore)
+	LD	DE,STR180	; Point to the Z180 string
+;
+; The DJNZ decrements the B register by 1 and will then do
+; a relative jump if the result is not zero. At this point,
+; B is either 00H already if we have a Z180 or still a 01H
+; if we have a Z80. The decrement will result in a zero only
+; in the case of a Z80, so a "Not Zero" means we have a Z180.
+;
+	DJNZ	DONE		; Check to see if we have a Z180
+;
+; If we drop through to here, we are running a Z80.
+;
+	LD	DE,STRZ80	; Point to the Z80 string
+;
+; We end up here no matter what and the DE register pair should
+; point to the appropriate completion portion of the message.
+;
+DONE:	LD	C,PRNSTR	; Load function number
+	JP	BDOS		; Print and then exit through BDOS
+
+;
+; Here is the start of the output message...
+;
+STRCPU:
+	DB	CR,LF,'This CPU is a$'
+
+;
+; ...and the completion depending on the processor type.
+;
+STRI80:
+	DB	'n 8080 or 8085.',CR,LF,'$'
+
+STR180:
+	DB	' Z180.',CR,LF,'$'
+
+STRZ80:
+	DB	' Z80.',CR,LF,'$'
+
+	END
+
