@@ -1,6 +1,8 @@
 # Z80-and-CP-M
 Various small Z80 and CP/M related projects. Some of these assemble under the Z80ASM assembler from SLR. I have also been experimenting with creating .COM files using the Microsoft BASCOM compiler.
 
+NOTE: I primarly use Z80 assembly language and also use the /Z flag on the BASCOM code (as is mentioned in the comments of those files). If you want to use the BASCOM examples on the 8080/8085 (or an emulator/clone like the Arduino-based Altair 8800 with the Z80 enabled), things should work but you do not want to use the /Z option when invoking BASCOM.
+
 ## CPUTYPE.Z80
 This program assembles and runs under CP/M and will tell you the type of processor (8080, Z80, or Z180) you are running. This was originally in a batch of CP/M examples with very little explaination of the logic. I created most of the detailed commentary (130 lines vs 55 lines) for my own edification.
 
