@@ -1,8 +1,16 @@
 # Z80-and-CP-M
-Various small Z80 and CP/M related projects. Many of these assemble under the Z80ASM assembler from SLR.
+Various small Z80 and CP/M related projects. Some of these assemble under the Z80ASM assembler from SLR. I have also been experimenting with creating .COM files using the Microsoft BASCOM compiler.
 
 ## CPUTYPE.Z80
 This program assembles and runs under CP/M and will tell you the type of processor (8080, Z80, or Z180) you are running. This was originally in a batch of CP/M examples with very little explaination of the logic. I created most of the detailed commentary (130 lines vs 55 lines) for my own edification.
+
+## ECHO.BAS
+This was one of my first "proof-of-concept" programs to demonstrate passing arguments from the CP/M command line to a BASIC program compiled using BASCOM.
+
+## UNIX2CPM.BAS
+Not pretty, but pretty useful... This is a more meaningful demonstration of passing command line arguments and is useful when using RunCPM on a Linux box. This replaces LFs with CR/LFs similar to Linux's unix2dos command, but runs under CP/M. Linking shows a size of 1,490 bytes and STAT shows 13 records (1,664 byes). This is similar in size to other utilities doing the same thing and actually significanly smaller than some version written in C.
+
+While the code isn't elegant, the flow it has is similar to how I would write a prototype prior to coding in assembly language.
 
 ## And the fine print...
 The copyright for most of the various files are held by others and subject to various terms and conditions. I have tried to recognize those involved and have left any notices or attribution in place with the files used.
