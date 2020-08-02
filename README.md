@@ -14,6 +14,9 @@ Not pretty, but pretty useful... This is a more meaningful demonstration of pass
 
 While the code isn't elegant, the flow it has is similar to how I would write a prototype prior to coding in assembly language.
 
+## XMODEM
+Source, executable, and base config file for Eberhard's fantastic XMODEM V2.7 program. Lots of older versions are floating around and I was tired of trying to track down the right version each time I was setting up a new computer or environment.
+
 ## And the fine print...
 The copyright for most of the various files are held by others and subject to various terms and conditions. I have tried to recognize those involved and have left any notices or attribution in place with the files used.
 
