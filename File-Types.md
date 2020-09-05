@@ -1,3 +1,7 @@
+# Common Archive and Compressio (CP/M)
+
+The following extensions are associated with various archive and compression programs under CP/M.
+
 | Extension | Type                                                  |
 | --------- | ----------------------------------------------------- |
 | .ARC or .ARK | Cross-platform archive. Typically ARC under CP/M |
@@ -10,3 +14,4 @@
 | .?Y? | Individual file compression with CRLZH20. Uncompress with UCRLZH20 |
 | .?Z? | Individual file compression with CR or CRUNH. Uncompress with UNCR or UNCRUNCH.|
 
+Maintained by Jim McClanahan W4JBM (last update Sept. 2020)
