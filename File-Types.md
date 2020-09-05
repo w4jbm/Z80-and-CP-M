@@ -14,4 +14,4 @@ The following extensions are associated with various archive and compression pro
 | .?Y? | Individual file compression with CRLZH20. Uncompress with UCRLZH20 |
 | .?Z? | Individual file compression with CR or CRUNH. Uncompress with UNCR or UNCRUNCH.|
 
-Maintained by Jim McClanahan W4JBM (last update Sept. 2020)
+*Maintained by Jim McClanahan W4JBM (last update Sept. 2020)*
