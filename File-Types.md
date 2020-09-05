@@ -1,5 +1,6 @@
-Extension | Type
-.ARC or .ARK | Cross-platform archive. Typically ARC under CP/M
+| Extension | Type                                                  |
+| --------- | ----------------------------------------------------- |
+| .ARC or .ARK | Cross-platform archive. Typically ARC under CP/M |
 .ARJ | Archive not created under CP/M. Can be extracted with UNARJ.
 .LBR
 Library file created with NULU or LAR. Extract with NULU or DELBR.
