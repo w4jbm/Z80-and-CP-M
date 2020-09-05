@@ -1,4 +1,4 @@
-# Common Archive and Compressio (CP/M)
+# Common Archive and Compression File Extensions
 
 The following extensions are associated with various archive and compression programs under CP/M.
 
