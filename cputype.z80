@@ -84,7 +84,7 @@ MLTBC	EQU	4CEDH		; Two byte opcode (reversed for DW)
 ; the value in BC will remain 0101H.
 
 ;
-; So let's test fpr a Z180...
+; So let's test for a Z180...
 ;
 	LD	BC,0101H	; Put ones in B and C
 	DW	MLTBC		; Multiply to BC if a Z180
